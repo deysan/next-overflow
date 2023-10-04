@@ -29,7 +29,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function Post({ params: { id } }: Props) {
+export default async function PostPage({ params: { id } }: Props) {
   const post = await getData(id);
 
   return (
