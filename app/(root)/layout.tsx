@@ -13,8 +13,8 @@ export default function Layout({ children }: { children: ReactNode }) {
           <div className="mx-auto w-full max-w-5xl">{children}</div>
         </section>
         <RightSidebar />
+        Toaster
       </div>
-      Toaster
     </main>
   );
 }
