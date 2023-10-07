@@ -20,7 +20,7 @@ function NavContent() {
     <section className="flex h-full flex-col gap-6 pt-16">
       {SIDEBAR_LINKS.map((item) => {
         const isActive =
-          (pathname.includes(item.route) && item.route.length > 1) ||
+          (item.route.length > 1 && pathname.includes(item.route)) ||
           pathname === item.route;
 
         // TODO

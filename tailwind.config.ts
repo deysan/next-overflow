@@ -69,11 +69,6 @@ module.exports = {
         },
         'accent-blue': '#1DA1F2',
       },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
-      },
       fontFamily: {
         inter: ['var(--font-inter)'],
         spaceGrotesk: ['var(--font-spaceGrotesk)'],
