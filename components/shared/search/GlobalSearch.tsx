@@ -10,7 +10,6 @@ export default function GlobalSearch() {
           alt="search"
           width={24}
           height={24}
-          className="cursor-pointer"
         />
 
         <Input
