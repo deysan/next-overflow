@@ -4,6 +4,7 @@ import LocalSearchBar from '@/components/shared/search/LocalSearchBar';
 import Filter from '@/components/shared/Filter';
 import { HomePageFilters } from '@/constants/filters';
 import HomeFilters from '@/components/home/HomeFilters';
+import NoResult from '@/components/shared/NoResult';
 
 export default function Home() {
   return (
@@ -38,6 +39,15 @@ export default function Home() {
       </div>
 
       <HomeFilters />
+
+      <div className="mt-10 flex w-full flex-col gap-6">
+        <NoResult
+          title="There’s no question to show"
+          description="Be the first to break the silence! 🚀 Ask a Question and kickstart the discussion. our query could be the next big thing others learn from. Get involved! 💡"
+          link="/ask-question"
+          linkTitle="Ask a Question"
+        />
+      </div>
     </>
   );
 }
