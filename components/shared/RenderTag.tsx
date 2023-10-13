@@ -7,7 +7,7 @@ export default function RenderTag({
   totalQuestions,
   showCount,
 }: {
-  _id: number;
+  _id: string;
   name: string;
   totalQuestions?: number;
   showCount?: boolean;

@@ -156,15 +156,15 @@
   }
 
   .small-regular {
-    @apply text-[12px] font-normal leading-[15.6px];
+    @apply text-[12px] font-normal leading-[16px];
   }
 
   .small-medium {
-    @apply text-[12px] font-medium leading-[15.6px];
+    @apply text-[12px] font-medium leading-[16px];
   }
 
   .small-semibold {
-    @apply text-[12px] font-semibold leading-[15.6px];
+    @apply text-[12px] font-semibold leading-[16px];
   }
 
   .subtle-medium {
