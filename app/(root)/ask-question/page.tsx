@@ -1,3 +1,9 @@
+import Question from '@/components/forms/Question';
+
 export default function AskQuestionPage() {
-  return <div>Ask Question Page</div>;
+  return (
+    <div>
+      <Question />
+    </div>
+  );
 }
