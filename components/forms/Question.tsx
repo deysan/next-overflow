@@ -21,10 +21,14 @@ import { QuestionsSchema } from '@/lib/validations';
 import { Badge } from '../ui/badge';
 import Image from 'next/image';
 import { createQuestion } from '@/lib/actions/question.action';
+import { usePathname, useRouter } from 'next/navigation';
 
 const type: any = 'create';
 
-export default function Question() {
+export default function Question({ mongoUserId }: { mongoUserId: string }) {
+  const router = useRouter();
+  const pathname = usePathname();
+
   const editorRef = useRef<TinyMCEEditor | null>(null);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -47,9 +51,16 @@ export default function Question() {
       // make an async call to your API -> create a question
       // contain all form data
 
-      await createQuestion({});
+      await createQuestion({
+        title: values.title,
+        content: values.explanation,
+        tags: values.tags,
+        author: JSON.parse(mongoUserId),
+        path: pathname,
+      });
 
       // navigate to home page
+      router.push('/');
     } catch (error) {
     } finally {
       setIsSubmitting(false);
