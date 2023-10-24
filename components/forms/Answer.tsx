@@ -17,11 +17,23 @@ import { useRef, useState } from 'react';
 import { useTheme } from '@/context/ThemeProvider';
 import { Button } from '../ui/button';
 import Image from 'next/image';
+import { createAnswer } from '@/lib/actions/answer.action';
+import { usePathname } from 'next/navigation';
 
-const Answer = () => {
+export default function Answer({
+  question,
+  questionId,
+  authorId,
+}: {
+  question: string;
+  questionId: string;
+  authorId: string;
+}) {
   const { mode } = useTheme();
 
-  const [isSubmitting] = useState(false);
+  const pathname = usePathname();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const editorRef = useRef<TinyMCEEditor | null>(null);
 
@@ -32,7 +44,30 @@ const Answer = () => {
     },
   });
 
-  const handleCreateAnswer = () => {};
+  const handleCreateAnswer = async (values: z.infer<typeof AnswerSchema>) => {
+    setIsSubmitting(true);
+
+    try {
+      await createAnswer({
+        content: values.answer,
+        author: JSON.parse(authorId),
+        question: JSON.parse(questionId),
+        path: pathname,
+      });
+
+      form.reset();
+
+      if (editorRef.current) {
+        const editor = editorRef.current;
+
+        editor.setContent('');
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div>
@@ -112,7 +147,7 @@ const Answer = () => {
 
           <div className="flex justify-end">
             <Button
-              type="button"
+              type="submit"
               className="primary-gradient w-fit text-white"
               disabled={isSubmitting}
             >
@@ -123,6 +158,4 @@ const Answer = () => {
       </Form>
     </div>
   );
-};
-
-export default Answer;
+}
