@@ -1,5 +1,12 @@
+'use client';
+
+import {
+  downvoteQuestion,
+  upvoteQuestion,
+} from '@/lib/actions/question.action';
 import { formatAndDivideNumber } from '@/lib/utils';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 export default function Votes({
   type,
@@ -20,9 +27,50 @@ export default function Votes({
   hasdownVoted: boolean;
   hasSaved?: boolean;
 }) {
-  const handleSave = () => {};
+  const pathname = usePathname();
 
-  const handleVote = (action: string) => {};
+  const handleSave = async () => {
+    console.log('save');
+  };
+
+  const handleVote = async (action: string) => {
+    if (!userId) {
+      return;
+    }
+
+    if (action === 'upvote') {
+      if (type === 'Question') {
+        await upvoteQuestion({
+          questionId: JSON.parse(itemId),
+          userId: JSON.parse(userId),
+          hasupVoted,
+          hasdownVoted,
+          path: pathname,
+        });
+      } else if (type === 'Answer') {
+        console.log('upvote answer');
+      }
+
+      // TODO: show a toast
+      return;
+    }
+
+    if (action === 'downvote') {
+      if (type === 'Question') {
+        await downvoteQuestion({
+          questionId: JSON.parse(itemId),
+          userId: JSON.parse(userId),
+          hasupVoted,
+          hasdownVoted,
+          path: pathname,
+        });
+      } else if (type === 'Answer') {
+        console.log('downvote answer');
+      }
+
+      // TODO: show a toast
+    }
+  };
 
   return (
     <div className="flex gap-5">
