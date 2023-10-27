@@ -6,6 +6,7 @@ import Link from 'next/link';
 import React from 'react';
 import Filter from './Filter';
 import ParseHTML from './ParseHTML';
+import Votes from './Votes';
 
 export default async function AllAnswers({
   questionId,
@@ -60,7 +61,17 @@ export default async function AllAnswers({
                   </div>
                 </Link>
 
-                <div className="flex justify-end">VOTING</div>
+                <div className="flex justify-end">
+                  <Votes
+                    type="Answer"
+                    itemId={JSON.stringify(answer._id)}
+                    userId={JSON.stringify(userId)}
+                    upvotes={answer.upvotes.length}
+                    hasupVoted={answer.upvotes.includes(userId)}
+                    downvotes={answer.downvotes.length}
+                    hasdownVoted={answer.downvotes.includes(userId)}
+                  />
+                </div>
               </div>
             </div>
 

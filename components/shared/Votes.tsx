@@ -1,5 +1,6 @@
 'use client';
 
+import { downvoteAnswer, upvoteAnswer } from '@/lib/actions/answer.action';
 import {
   downvoteQuestion,
   upvoteQuestion,
@@ -48,7 +49,13 @@ export default function Votes({
           path: pathname,
         });
       } else if (type === 'Answer') {
-        console.log('upvote answer');
+        await upvoteAnswer({
+          answerId: JSON.parse(itemId),
+          userId: JSON.parse(userId),
+          hasupVoted,
+          hasdownVoted,
+          path: pathname,
+        });
       }
 
       // TODO: show a toast
@@ -65,7 +72,13 @@ export default function Votes({
           path: pathname,
         });
       } else if (type === 'Answer') {
-        console.log('downvote answer');
+        await downvoteAnswer({
+          answerId: JSON.parse(itemId),
+          userId: JSON.parse(userId),
+          hasupVoted,
+          hasdownVoted,
+          path: pathname,
+        });
       }
 
       // TODO: show a toast
