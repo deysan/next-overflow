@@ -1,3 +1,4 @@
+import AnswersTab from '@/components/shared/AnswersTab';
 import { ProfileLink } from '@/components/shared/ProfileLink';
 import QuestionTab from '@/components/shared/QuestionTab';
 import Stats from '@/components/shared/Stats';
@@ -13,7 +14,6 @@ import Link from 'next/link';
 export default async function Page({ params, searchParams }: URLProps) {
   const { userId: clerkId } = auth();
   const userInfo = await getUserInfo({ userId: params.id });
-  console.log('🚀 ~ file: page.tsx:6 ~ Page ~ userInfo:', userInfo);
 
   return (
     <>
@@ -96,7 +96,11 @@ export default async function Page({ params, searchParams }: URLProps) {
           </TabsContent>
 
           <TabsContent value="answers" className="flex w-full flex-col gap-6">
-            AnswersTab
+            <AnswersTab
+              searchParams={searchParams}
+              userId={userInfo.user._id}
+              clerkId={clerkId}
+            />
           </TabsContent>
         </Tabs>
       </div>
