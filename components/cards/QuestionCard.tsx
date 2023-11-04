@@ -13,6 +13,7 @@ export default function QuestionCard({
   views,
   answers,
   createdAt,
+  clerkId,
 }: {
   _id: string;
   title: string;
@@ -29,6 +30,7 @@ export default function QuestionCard({
   views: number;
   answers: Array<object>;
   createdAt: Date;
+  clerkId?: string | null;
 }) {
   return (
     <div className="card-wrapper rounded-[10px] p-9 sm:px-11">
