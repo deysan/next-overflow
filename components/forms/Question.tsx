@@ -17,7 +17,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Editor } from '@tinymce/tinymce-react';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
-import { KeyboardEvent, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Editor as TinyMCEEditor } from 'tinymce';
 import * as z from 'zod';
@@ -88,7 +88,7 @@ export default function Question({
   }
 
   const handleInputKeyDown = (
-    e: KeyboardEvent<HTMLInputElement>,
+    e: React.KeyboardEvent<HTMLInputElement>,
     field: any
   ) => {
     if (e.key === 'Enter' && field.name === 'tags') {

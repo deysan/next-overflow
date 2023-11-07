@@ -1,5 +1,7 @@
 'use server';
 
+import Answer from '@/database/answer.model';
+import Interaction from '@/database/interaction.model';
 import Question from '@/database/question.model';
 import Tag from '@/database/tag.model';
 import User from '@/database/user.model';
@@ -13,8 +15,6 @@ import {
   GetQuestionsParams,
   QuestionVoteParams,
 } from './shared.types';
-import Answer from '@/database/answer.model';
-import Interaction from '@/database/interaction.model';
 
 export async function getQuestions(params: GetQuestionsParams) {
   try {
@@ -56,17 +56,17 @@ export async function createQuestion(params: CreateQuestionParams) {
       );
 
       tagDocuments.push(existingTag._id);
-
-      await Question.findByIdAndUpdate(question._id, {
-        $push: { tags: { $each: tagDocuments } },
-      });
-
-      // Create an interaction record for the user's ask_question action
-
-      // Increment author's reputation by +5 for creating a question
-
-      revalidatePath(path);
     }
+
+    await Question.findByIdAndUpdate(question._id, {
+      $push: { tags: { $each: tagDocuments } },
+    });
+
+    // Create an interaction record for the user's ask_question action
+
+    // Increment author's reputation by +5 for creating a question
+
+    revalidatePath(path);
   } catch (error) {}
 }
 

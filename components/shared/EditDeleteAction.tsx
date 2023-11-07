@@ -1,6 +1,6 @@
 'use client';
 
-// import { deleteAnswer } from '@/lib/actions/answer.action';
+import { deleteAnswer } from '@/lib/actions/answer.action';
 import { deleteQuestion } from '@/lib/actions/question.action';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
@@ -28,10 +28,10 @@ export default function EditDeleteAction({
       });
     } else if (type === 'Answer') {
       // Delete answer
-      // await deleteAnswer({
-      //   answerId: JSON.parse(itemId),
-      //   path: pathname,
-      // });
+      await deleteAnswer({
+        answerId: JSON.parse(itemId),
+        path: pathname,
+      });
     }
   };
 
