@@ -35,10 +35,6 @@ export default function QuestionCard({
   clerkId?: string | null;
 }) {
   const showActionButtons = clerkId && clerkId === author.clerkId;
-  console.log(
-    '🚀 ~ file: QuestionCard.tsx:37 ~ showActionButtons:',
-    showActionButtons
-  );
 
   return (
     <div className="card-wrapper rounded-[10px] p-9 sm:px-11">
