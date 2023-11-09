@@ -1,15 +1,18 @@
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import LocalSearchBar from '@/components/shared/search/LocalSearchBar';
-import Filter from '@/components/shared/Filter';
-import { HomePageFilters } from '@/constants/filters';
-import HomeFilters from '@/components/home/HomeFilters';
-import NoResult from '@/components/shared/NoResult';
 import QuestionCard from '@/components/cards/QuestionCard';
+import HomeFilters from '@/components/home/HomeFilters';
+import Filter from '@/components/shared/Filter';
+import NoResult from '@/components/shared/NoResult';
+import LocalSearchBar from '@/components/shared/search/LocalSearchBar';
+import { Button } from '@/components/ui/button';
+import { HomePageFilters } from '@/constants/filters';
 import { getQuestions } from '@/lib/actions/question.action';
+import { SearchParamsProps } from '@/types';
+import Link from 'next/link';
 
-export default async function Home() {
-  const result = await getQuestions({});
+export default async function Home({ searchParams }: SearchParamsProps) {
+  const result = await getQuestions({
+    searchQuery: searchParams.q,
+  });
 
   return (
     <>
