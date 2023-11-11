@@ -111,6 +111,8 @@ export default async function Page({
         questionId={result._id}
         userId={mongoUser._id}
         totalAnswers={result.answers.length}
+        page={searchParams?.page as string}
+        filter={searchParams?.filter as string}
       />
 
       <Answer
