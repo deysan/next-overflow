@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import Filter from './Filter';
+import Pagination from './Pagination';
 import ParseHTML from './ParseHTML';
 import Votes from './Votes';
 
@@ -80,6 +81,13 @@ export default async function AllAnswers({
             <ParseHTML data={answer.content} />
           </article>
         ))}
+      </div>
+
+      <div className="mt-10 w-full">
+        <Pagination
+          pageNumber={page ? +page : 1}
+          isNext={result.isNextAnswer}
+        />
       </div>
     </div>
   );

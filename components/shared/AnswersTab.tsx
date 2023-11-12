@@ -1,6 +1,7 @@
 import { getUserAnswers } from '@/lib/actions/user.action';
 import { SearchParamsProps } from '@/types';
 import AnswerCard from '../cards/AnswerCard';
+import Pagination from './Pagination';
 
 export default async function AnswersTab({
   searchParams,
@@ -12,7 +13,7 @@ export default async function AnswersTab({
 } & SearchParamsProps) {
   const result = await getUserAnswers({
     userId,
-    page: 1,
+    page: searchParams.page ? +searchParams.page : 1,
   });
 
   return (
@@ -28,6 +29,13 @@ export default async function AnswersTab({
           createdAt={item.createdAt}
         />
       ))}
+
+      <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={result.isNextAnswer}
+        />
+      </div>
     </>
   );
 }
