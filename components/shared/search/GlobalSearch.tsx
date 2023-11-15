@@ -1,10 +1,11 @@
 'use client';
 
-import Image from 'next/image';
-import React, { useEffect, useRef, useState } from 'react';
 import { Input } from '@/components/ui/input';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { formUrlQuery, removeKeysFromQuery } from '@/lib/utils';
+import Image from 'next/image';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import React, { useEffect, useRef, useState } from 'react';
+import GlobalResult from './GlobalResult';
 
 export default function GlobalSearch() {
   const router = useRouter();
@@ -16,6 +17,27 @@ export default function GlobalSearch() {
 
   const [search, setSearch] = useState(query || '');
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const handleOutsideClick = (event: any) => {
+      if (
+        searchContainerRef.current &&
+        // @ts-ignore
+        !searchContainerRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+        setSearch('');
+      }
+    };
+
+    setIsOpen(false);
+
+    document.addEventListener('click', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -66,9 +88,11 @@ export default function GlobalSearch() {
             if (!isOpen) setIsOpen(true);
             if (e.target.value === '' && isOpen) setIsOpen(false);
           }}
-          className="paragraph-regular no-focus placeholder text-dark400_light700 background-light800_darkgradient border-none shadow-none outline-none"
+          className="paragraph-regular no-focus placeholder text-dark400_light700 border-none bg-transparent shadow-none outline-none"
         />
       </div>
+
+      {isOpen && <GlobalResult />}
     </div>
   );
 }

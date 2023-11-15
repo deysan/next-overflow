@@ -1,10 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
 import { ReloadIcon } from '@radix-ui/react-icons';
-import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import GlobalFilters from './GlobalFilters';
+import { globalSearch } from '@/lib/actions/general.action';
 
 export default function GlobalResult() {
   const searchParams = useSearchParams();
@@ -25,7 +27,8 @@ export default function GlobalResult() {
       setIsLoading(true);
 
       try {
-        // GLOBAL SEARCH
+        const res = await globalSearch({ query: global, type });
+        setResult(JSON.parse(res));
       } catch (error) {
         console.error(error);
         throw error;
@@ -33,6 +36,10 @@ export default function GlobalResult() {
         setIsLoading(false);
       }
     };
+
+    if (global) {
+      fetchResult();
+    }
   }, [global, type]);
 
   const renderLink = (type: string, id: string) => {
@@ -52,7 +59,7 @@ export default function GlobalResult() {
 
   return (
     <div className="absolute top-full z-10 mt-3 w-full rounded-xl bg-light-800 py-5 shadow-sm dark:bg-dark-400">
-      {/* <GlobalFilters /> */}
+      <GlobalFilters />
 
       <div className="my-5 h-[1px] bg-light-700/50 dark:bg-dark-500/50" />
 
@@ -64,6 +71,7 @@ export default function GlobalResult() {
         {isLoading ? (
           <div className="flex-center flex-col px-5">
             <ReloadIcon className="my-2 h-10 w-10 animate-spin text-primary-500" />
+
             <p className="text-dark200_light800 body-regular">
               Browsing the entire database
             </p>
@@ -75,7 +83,7 @@ export default function GlobalResult() {
                 <Link
                   href={renderLink(item.type, item.id)}
                   key={item.type + item.id + index}
-                  className="flex w-full cursor-pointer items-start gap-3 px-5 py-2.5 hover:bg-light-700/50 dark:bg-dark-500/50"
+                  className="flex w-full cursor-pointer items-start gap-3 px-5 py-2.5 hover:bg-light-700/50 hover:dark:bg-dark-500/50"
                 >
                   <Image
                     src="/assets/icons/tag.svg"
