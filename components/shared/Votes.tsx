@@ -11,6 +11,7 @@ import { formatAndDivideNumber } from '@/lib/utils';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { toast } from '../ui/use-toast';
 
 export default function Votes({
   type,
@@ -40,11 +41,21 @@ export default function Votes({
       questionId: JSON.parse(itemId),
       path: pathname,
     });
+
+    return toast({
+      title: `Question ${
+        !hasSaved ? 'Saved in' : 'Removed from'
+      } your collection`,
+      variant: !hasSaved ? 'default' : 'destructive',
+    });
   };
 
   const handleVote = async (action: string) => {
     if (!userId) {
-      return;
+      return toast({
+        title: 'Please log in',
+        description: 'You must be logged in to perform this action',
+      });
     }
 
     if (action === 'upvote') {
@@ -65,13 +76,20 @@ export default function Votes({
           path: pathname,
         });
       }
+      console.log(
+        '🚀 ~ file: Votes.tsx:93 ~ handleVote ~ hasupVoted:',
+        hasupVoted
+      );
 
-      // TODO: show a toast
-      return;
+      return toast({
+        title: `Upvote ${!hasupVoted ? 'Successful' : 'Removed'}`,
+        variant: !hasupVoted ? 'default' : 'destructive',
+      });
     }
 
     if (action === 'downvote') {
       if (type === 'Question') {
+        console.log('🚀 ~ file: Votes.tsx:92 ~ handleVote ~ type:', type);
         await downvoteQuestion({
           questionId: JSON.parse(itemId),
           userId: JSON.parse(userId),
@@ -88,8 +106,15 @@ export default function Votes({
           path: pathname,
         });
       }
+      console.log(
+        '🚀 ~ file: Votes.tsx:93 ~ handleVote ~ hasdownVoted:',
+        hasdownVoted
+      );
 
-      // TODO: show a toast
+      return toast({
+        title: `Downvote ${!hasdownVoted ? 'Successful' : 'Removed'}`,
+        variant: !hasdownVoted ? 'default' : 'destructive',
+      });
     }
   };
 
