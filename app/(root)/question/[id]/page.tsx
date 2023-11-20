@@ -31,6 +31,7 @@ export default async function Page({
   if (clerkId) {
     mongoUser = await getUserById({ userId: clerkId });
   }
+  console.log('🚀 ~ file: page.tsx:33 ~ mongoUser:', mongoUser);
 
   const result = await getQuestionById({ questionId: params.id });
 
@@ -59,11 +60,11 @@ export default async function Page({
             <Votes
               type="Question"
               itemId={JSON.stringify(result._id)}
-              userId={JSON.stringify(mongoUser._id)}
+              userId={JSON.stringify(mongoUser?._id)}
               upvotes={result.upvotes.length}
-              hasupVoted={result.upvotes.includes(mongoUser._id)}
+              hasupVoted={result.upvotes.includes(mongoUser?._id)}
               downvotes={result.downvotes.length}
-              hasdownVoted={result.downvotes.includes(mongoUser._id)}
+              hasdownVoted={result.downvotes.includes(mongoUser?._id)}
               hasSaved={mongoUser?.saved.includes(result._id)}
             />
           </div>
@@ -115,7 +116,7 @@ export default async function Page({
 
       <AllAnswers
         questionId={result._id}
-        userId={mongoUser._id}
+        userId={mongoUser?._id}
         totalAnswers={result.answers.length}
         page={searchParams?.page as string}
         filter={searchParams?.filter as string}
@@ -124,7 +125,7 @@ export default async function Page({
       <Answer
         question={result.content}
         questionId={JSON.stringify(result._id)}
-        authorId={JSON.stringify(mongoUser._id)}
+        authorId={JSON.stringify(mongoUser?._id)}
       />
     </>
   );
