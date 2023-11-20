@@ -8,6 +8,12 @@ import { getSavedQuestions } from '@/lib/actions/user.action';
 import { SearchParamsProps } from '@/types';
 import { auth } from '@clerk/nextjs';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Collection | Next Overflow',
+};
+
 export default async function Page({ searchParams }: SearchParamsProps) {
   const { userId } = auth();
 

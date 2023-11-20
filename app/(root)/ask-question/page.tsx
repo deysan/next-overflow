@@ -3,6 +3,12 @@ import { getUserById } from '@/lib/actions/user.action';
 import { auth } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Ask Question | Next Overflow',
+};
+
 export default async function Page() {
   const { userId } = auth();
 

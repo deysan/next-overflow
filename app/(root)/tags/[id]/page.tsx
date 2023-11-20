@@ -5,6 +5,12 @@ import LocalSearchBar from '@/components/shared/search/LocalSearchBar';
 import { getQuestionsByTagId } from '@/lib/actions/tag.actions';
 import { URLProps } from '@/types';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Tag | Next Overflow',
+};
+
 export default async function Page({ params, searchParams }: URLProps) {
   const result = await getQuestionsByTagId({
     tagId: params.id,
