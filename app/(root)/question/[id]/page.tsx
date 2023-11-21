@@ -31,7 +31,6 @@ export default async function Page({
   if (clerkId) {
     mongoUser = await getUserById({ userId: clerkId });
   }
-  console.log('🚀 ~ file: page.tsx:33 ~ mongoUser:', mongoUser);
 
   const result = await getQuestionById({ questionId: params.id });
 
