@@ -64,7 +64,7 @@ export default function Answer({
         editor.setContent('');
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setIsSubmitting(false);
     }
@@ -97,7 +97,7 @@ export default function Answer({
 
       // Toast...
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setSetIsSubmittingAI(false);
     }

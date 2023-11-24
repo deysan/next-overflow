@@ -30,7 +30,7 @@ export async function getUserById(params: any) {
 
     return user;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 }
@@ -43,7 +43,7 @@ export async function createUser(userData: CreateUserParams) {
 
     return newUser;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 }
@@ -60,7 +60,7 @@ export async function updateUser(params: UpdateUserParams) {
 
     revalidatePath(path);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 }
@@ -94,7 +94,7 @@ export async function deleteUser(params: DeleteUserParams) {
 
     return deletedUser;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 }
@@ -144,7 +144,7 @@ export async function getAllUsers(params: GetAllUsersParams) {
 
     return { users, isNext };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 }
@@ -181,7 +181,7 @@ export async function toggleSaveQuestion(params: ToggleSaveQuestionParams) {
 
     revalidatePath(path);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 }
@@ -245,7 +245,7 @@ export async function getSavedQuestions(params: GetSavedQuestionsParams) {
 
     return { questions: savedQuestions, isNext };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 }
@@ -334,7 +334,7 @@ export async function getUserInfo(params: GetUserByIdParams) {
       reputation: user.reputation,
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 }
@@ -360,7 +360,7 @@ export async function getUserQuestions(params: GetUserStatsParams) {
 
     return { totalQuestions, questions: userQuestions, isNextQuestions };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 }
@@ -386,7 +386,7 @@ export async function getUserAnswers(params: GetUserStatsParams) {
 
     return { totalAnswers, answers: userAnswers, isNextAnswer };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 }

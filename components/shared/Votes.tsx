@@ -76,10 +76,6 @@ export default function Votes({
           path: pathname,
         });
       }
-      console.log(
-        '🚀 ~ file: Votes.tsx:93 ~ handleVote ~ hasupVoted:',
-        hasupVoted
-      );
 
       return toast({
         title: `Upvote ${!hasupVoted ? 'Successful' : 'Removed'}`,
@@ -89,7 +85,6 @@ export default function Votes({
 
     if (action === 'downvote') {
       if (type === 'Question') {
-        console.log('🚀 ~ file: Votes.tsx:92 ~ handleVote ~ type:', type);
         await downvoteQuestion({
           questionId: JSON.parse(itemId),
           userId: JSON.parse(userId),
@@ -106,10 +101,6 @@ export default function Votes({
           path: pathname,
         });
       }
-      console.log(
-        '🚀 ~ file: Votes.tsx:93 ~ handleVote ~ hasdownVoted:',
-        hasdownVoted
-      );
 
       return toast({
         title: `Downvote ${!hasdownVoted ? 'Successful' : 'Removed'}`,

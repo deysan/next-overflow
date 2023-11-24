@@ -29,7 +29,7 @@ export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
       { _id: '2', name: 'tag2' },
     ];
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 }
@@ -79,7 +79,7 @@ export async function getAllTags(params: GetAllTagsParams) {
 
     return { tags, isNext };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 }
@@ -121,7 +121,7 @@ export async function getQuestionsByTagId(params: GetQuestionsByTagIdParams) {
 
     return { tagTitle: tag.name, questions, isNext };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 }
@@ -138,7 +138,7 @@ export async function getTopPopularTags() {
 
     return popularTags;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 }
