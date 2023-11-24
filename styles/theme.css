@@ -187,7 +187,7 @@
     @apply shadow-light-100 dark:shadow-dark-100;
   }
 
-  .shadow-light100_darknone {
+  .shadow-light100_darkNone {
     @apply shadow-light-100 dark:shadow-none;
   }
 
