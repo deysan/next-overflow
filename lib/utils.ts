@@ -56,7 +56,7 @@ export function formatAndDivideNumber(num: number): string {
   }
 }
 
-export const getJoinedDate = (date: Date): string => {
+export function getJoinedDate(date: Date): string {
   // Extract the month and year from the Date object
   const month = date.toLocaleString('default', { month: 'long' });
   const year = date.getFullYear();
@@ -65,9 +65,9 @@ export const getJoinedDate = (date: Date): string => {
   const joinedDate = `${month} ${year}`;
 
   return joinedDate;
-};
+}
 
-export const formUrlQuery = ({
+export function formUrlQuery({
   params,
   key,
   value,
@@ -75,7 +75,7 @@ export const formUrlQuery = ({
   params: string;
   key: string;
   value: string | null;
-}) => {
+}) {
   const currentUrl = qs.parse(params);
 
   currentUrl[key] = value;
@@ -87,15 +87,15 @@ export const formUrlQuery = ({
     },
     { skipNull: true }
   );
-};
+}
 
-export const removeKeysFromQuery = ({
+export function removeKeysFromQuery({
   params,
   keysToRemove,
 }: {
   params: string;
   keysToRemove: string[];
-}) => {
+}) {
   const currentUrl = qs.parse(params);
 
   keysToRemove.forEach((key) => {
@@ -109,14 +109,14 @@ export const removeKeysFromQuery = ({
     },
     { skipNull: true }
   );
-};
+}
 
-export const assignBadges = (params: {
+export function assignBadges(params: {
   criteria: {
     type: keyof typeof BADGE_CRITERIA;
     count: number;
   }[];
-}) => {
+}) {
   const badgeCounts: BadgeCountsType = {
     GOLD: 0,
     SILVER: 0,
@@ -137,4 +137,34 @@ export const assignBadges = (params: {
   });
 
   return badgeCounts;
-};
+}
+
+export function processJobTitle(title: string | undefined | null): string {
+  // Check if title is undefined or null
+  if (title === undefined || title === null) {
+    return 'No Job Title';
+  }
+
+  // Split the title into words
+  const words = title.split(' ');
+
+  // Filter out undefined or null and other unwanted words
+  const validWords = words.filter((word) => {
+    return (
+      word !== undefined &&
+      word !== null &&
+      word.toLowerCase() !== 'undefined' &&
+      word.toLowerCase() !== 'null'
+    );
+  });
+
+  // If no valid words are left, return the general title
+  if (validWords.length === 0) {
+    return 'No Job Title';
+  }
+
+  // Join the valid words to create the processed title
+  const processedTitle = validWords.join(' ');
+
+  return processedTitle;
+}

@@ -1,7 +1,7 @@
 import Filter from '@/components/shared/Filter';
 import NoResult from '@/components/shared/NoResult';
 import Pagination from '@/components/shared/Pagination';
-import LocalSearchbar from '@/components/shared/search/LocalSearchBar';
+import LocalSearchBar from '@/components/shared/search/LocalSearchBar';
 import { TagFilters } from '@/constants/filters';
 import { getAllTags } from '@/lib/actions/tag.actions';
 import { SearchParamsProps } from '@/types';
@@ -25,7 +25,7 @@ export default async function Page({ searchParams }: SearchParamsProps) {
       <h1 className="h1-bold text-dark100_light900">All Tags</h1>
 
       <div className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
-        <LocalSearchbar
+        <LocalSearchBar
           route="/tags"
           iconPosition="left"
           imgSrc="/assets/icons/search.svg"
@@ -45,7 +45,7 @@ export default async function Page({ searchParams }: SearchParamsProps) {
             <Link
               href={`/tags/${tag._id}`}
               key={tag._id}
-              className="shadow-light100_darknone"
+              className="shadow-light100_darkNone"
             >
               <article className="background-light900_dark200 light-border flex w-full flex-col rounded-2xl border px-8 py-10 sm:w-[260px]">
                 <div className="background-light800_dark400 w-fit rounded-sm px-5 py-1.5">
